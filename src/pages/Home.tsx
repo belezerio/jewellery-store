@@ -89,8 +89,8 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. Shop by Category (GIVA Style Rounded Swiper) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative group">
+      {/* 2. Shop by Category (GIVA Style Rounded Widescreen Swiper) */}
+      <section className="w-full px-4 sm:px-8 lg:px-12 relative group">
         <div className="text-center mb-10">
           <h2 className="font-serif text-3xl sm:text-4xl tracking-widest text-[#0f2e24]">
             Shop by Category
@@ -101,35 +101,39 @@ export const Home: React.FC = () => {
         <Swiper
           modules={[Navigation]}
           spaceBetween={16}
-          slidesPerView={3}
+          slidesPerView={4}
           navigation
+          centerInsufficientSlides={true}
           breakpoints={{
-            480: { slidesPerView: 4 },
-            768: { slidesPerView: 6 },
+            480: { slidesPerView: 5 },
+            768: { slidesPerView: 7 },
             1024: { slidesPerView: 8 },
           }}
           className="category-swiper pb-4"
         >
           {[
-            { name: 'Rings', handle: 'frontpage', img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=400' },
-            { name: 'Bracelets', handle: 'frontpage', img: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=400' },
-            { name: 'Pendants', handle: 'frontpage', img: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=400' },
-            { name: 'Earrings', handle: 'frontpage', img: 'https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&w=400' },
-            { name: 'Men in Silver', handle: 'frontpage', img: 'https://images.unsplash.com/photo-1618453292459-53424b6ebeb7?q=80&w=400' },
-            { name: 'Sets', handle: 'frontpage', img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400' },
-            { name: 'Anklets', handle: 'frontpage', img: 'https://images.unsplash.com/photo-1543294001-f7cbfe92237e?q=80&w=400' },
-            { name: 'Silver Chains', handle: 'frontpage', img: 'https://images.unsplash.com/photo-1599643477877-537ef5278530?q=80&w=400' },
+            { name: 'Rings', handle: 'frontpage', img: '/categories/rings.png' },
+            { name: 'Bracelets', handle: 'frontpage', img: '/categories/bracelets.png' },
+            { name: 'Pendants', handle: 'frontpage', img: '/categories/pendants.png' },
+            { name: 'Earrings', handle: 'frontpage', img: '/categories/earrings.png' },
+            { name: 'Men in Silver', handle: 'frontpage', img: '/categories/men.png' },
+            { name: 'Sets', handle: 'frontpage', img: '/categories/sets.png' },
+            { name: 'Anklets', handle: 'frontpage', img: '/categories/anklets.png' },
+            { name: 'Silver Chains', handle: 'frontpage', img: '/categories/chains.png' },
           ].map((cat, idx) => (
             <SwiperSlide key={idx}>
               <Link to={`/collection/${cat.handle}`} className="group text-center block">
-                <div className="relative aspect-square w-full bg-[#82132d] rounded-[24px] overflow-hidden flex items-center justify-center p-3 transition-transform duration-300 group-hover:scale-[1.02] shadow-sm">
-                  <div className="absolute inset-0 bg-gradient-to-b from-[#82132d]/40 via-transparent to-[#4a0615]/60 z-10" />
+                <motion.div
+                  whileHover={{ scale: 1.06, rotate: 1 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  className="relative aspect-square w-full bg-[#82132d] rounded-[24px] overflow-hidden flex items-center justify-center p-3 shadow-md hover:shadow-xl transition-all duration-500"
+                >
                   <img
                     src={cat.img}
                     alt={cat.name}
-                    className="w-full h-full object-cover rounded-[18px] relative z-0 transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover rounded-[18px] relative z-0 transition-transform duration-700 group-hover:scale-108"
                   />
-                </div>
+                </motion.div>
                 <h3 className="font-sans text-[11px] font-semibold tracking-wide text-gray-700 uppercase mt-3 group-hover:text-[#c5a880] transition-colors duration-300">
                   {cat.name}
                 </h3>
@@ -204,7 +208,7 @@ export const Home: React.FC = () => {
           <div className="relative overflow-hidden group bg-gradient-to-t from-[#f6ebe1] to-[#faf9f6] rounded-[24px] border border-[#e6c89c]/15 p-6 flex flex-col justify-between items-center text-center h-[350px] md:h-[400px]">
             <div className="absolute bottom-0 w-[80%] h-[85%] bg-[#ecdac9] rounded-t-[140px] z-0" />
             <img
-              src="https://images.unsplash.com/photo-1618453292459-53424b6ebeb7?q=80&w=600"
+              src="../../public/man.png"
               alt="Shop For Him"
               className="absolute bottom-0 h-[80%] object-contain z-10 transition-transform duration-700 group-hover:scale-103"
             />
@@ -221,7 +225,7 @@ export const Home: React.FC = () => {
           <div className="relative overflow-hidden group bg-gradient-to-t from-[#f6ebe1] to-[#faf9f6] rounded-[24px] border border-[#e6c89c]/15 p-6 flex flex-col justify-between items-center text-center h-[350px] md:h-[400px]">
             <div className="absolute bottom-0 w-[80%] h-[85%] bg-[#ecdac9] rounded-t-[140px] z-0" />
             <img
-              src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=600"
+              src="../../public/girl.png"
               alt="Shop For Her"
               className="absolute bottom-0 h-[80%] object-contain z-10 transition-transform duration-700 group-hover:scale-103"
             />
@@ -252,10 +256,10 @@ export const Home: React.FC = () => {
           {/* Center: Curated Copy */}
           <div className="text-center md:text-left flex-1 space-y-2">
             <h2 className="font-serif text-3xl md:text-4xl italic text-[#0f2e24] tracking-wide font-semibold">
-              Kriti's Favourites
+              Everyone's Favourites
             </h2>
             <p className="text-sm tracking-wider text-[#82132d] font-bold uppercase">
-              Kriti picked these. Your turn now
+              Everyone picked these. Your turn now
             </p>
           </div>
 
@@ -286,7 +290,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 2.8. GIVA "Latest Collections" Overlapping Product Panels */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="w-full px-4 sm:px-8 lg:px-12 space-y-8">
         <div className="text-center">
           <h2 className="font-serif text-3xl sm:text-4xl tracking-widest text-[#0f2e24] font-semibold">
             Latest Collections
@@ -299,10 +303,13 @@ export const Home: React.FC = () => {
           spaceBetween={24}
           slidesPerView={1}
           navigation
+          centerInsufficientSlides={true}
           pagination={{ clickable: true }}
           autoplay={{ delay: 5000, disableOnInteraction: false }}
           breakpoints={{
-            768: { slidesPerView: 2 },
+            640: { slidesPerView: 1.5 },
+            1024: { slidesPerView: 2.5 },
+            1440: { slidesPerView: 3 },
           }}
           className="latest-collections-swiper pb-12"
         >
@@ -314,9 +321,9 @@ export const Home: React.FC = () => {
               bg: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800',
               bgColor: 'bg-slate-900',
               products: [
-                { img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-1' },
-                { img: 'https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-2' },
-                { img: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-3' }
+                { img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-1', delay: 'delay-[0ms]' },
+                { img: 'https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-2', delay: 'delay-[75ms]' },
+                { img: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-3', delay: 'delay-[150ms]' }
               ]
             },
             {
@@ -326,9 +333,9 @@ export const Home: React.FC = () => {
               bg: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=800',
               bgColor: 'bg-[#1f242e]',
               products: [
-                { img: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-1' },
-                { img: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-2' },
-                { img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-3' }
+                { img: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-1', delay: 'delay-[0ms]' },
+                { img: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-2', delay: 'delay-[75ms]' },
+                { img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-3', delay: 'delay-[150ms]' }
               ]
             },
             {
@@ -338,9 +345,9 @@ export const Home: React.FC = () => {
               bg: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=800',
               bgColor: 'bg-[#2b1f13]',
               products: [
-                { img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-1' },
-                { img: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-2' },
-                { img: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-3' }
+                { img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-1', delay: 'delay-[0ms]' },
+                { img: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-2', delay: 'delay-[75ms]' },
+                { img: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-3', delay: 'delay-[150ms]' }
               ]
             },
             {
@@ -350,24 +357,24 @@ export const Home: React.FC = () => {
               bg: 'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=800',
               bgColor: 'bg-[#182126]',
               products: [
-                { img: 'https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-1' },
-                { img: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-2' },
-                { img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-3' }
+                { img: 'https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-1', delay: 'delay-[0ms]' },
+                { img: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-2', delay: 'delay-[75ms]' },
+                { img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=200', link: '/product/asset-pack-47843966978-example-product-3', delay: 'delay-[150ms]' }
               ]
             }
-          ].map((col, cIdx) => (
-            <SwiperSlide key={cIdx}>
+          ].map((col, colIdx) => (
+            <SwiperSlide key={colIdx}>
               <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
-                className={`relative overflow-hidden group rounded-[28px] border border-[#e6c89c]/15 shadow-sm h-[400px] flex flex-col justify-between p-6 ${col.bgColor}`}
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className={`relative overflow-hidden group rounded-[28px] border border-[#e6c89c]/15 shadow-sm h-[420px] flex flex-col justify-between p-6 ${col.bgColor}`}
               >
                 {/* Background image overlay */}
                 <div
-                  className="absolute inset-0 bg-cover bg-center opacity-40 transition-transform duration-[2s] ease-out group-hover:scale-108"
+                  className="absolute inset-0 bg-cover bg-center opacity-40 transition-transform duration-[2s] ease-out group-hover:scale-110"
                   style={{ backgroundImage: `url(${col.bg})` }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent z-0" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-0" />
 
                 {/* Top title area */}
                 <div className="relative z-10 space-y-2">
@@ -383,27 +390,26 @@ export const Home: React.FC = () => {
                 {/* Overlapping Products List Sitting at the Bottom */}
                 <div className="relative z-10 flex gap-3 mt-4 items-center">
                   {col.products.map((prod, pIdx) => (
-                    <motion.div
+                    <div
                       key={pIdx}
-                      whileHover={{ y: -4, scale: 1.05 }}
-                      className="flex-shrink-0"
+                      className={`flex-shrink-0 transition-transform duration-500 ease-out transform group-hover:-translate-y-4 ${prod.delay}`}
                     >
                       <Link
                         to={prod.link}
-                        className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl overflow-hidden border border-[#e6c89c]/20 p-1 flex items-center justify-center shadow-lg block transition-all hover:border-[#c5a880]"
+                        className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl overflow-hidden border border-[#e6c89c]/20 p-1 flex items-center justify-center shadow-lg block hover:scale-105 transition-transform duration-300 hover:border-[#c5a880]"
                       >
                         <img src={prod.img} alt="Product thumb" className="w-full h-full object-cover rounded-xl" />
                       </Link>
-                    </motion.div>
+                    </div>
                   ))}
-                  <motion.div whileHover={{ scale: 1.1 }}>
+                  <div className="transition-transform duration-500 ease-out transform group-hover:-translate-y-4 delay-[225ms]">
                     <Link
                       to="/collection/frontpage"
-                      className="w-10 h-10 md:w-12 md:h-12 bg-[#b39359] text-white rounded-full flex items-center justify-center hover:bg-white hover:text-[#0f2e24] transition-colors duration-300 shadow-lg font-bold"
+                      className="w-10 h-10 md:w-12 md:h-12 bg-[#b39359] text-white rounded-full flex items-center justify-center hover:bg-white hover:text-[#0f2e24] transition-colors duration-300 shadow-lg font-bold hover:scale-110"
                     >
                       ➔
                     </Link>
-                  </motion.div>
+                  </div>
                 </div>
               </motion.div>
             </SwiperSlide>
@@ -443,6 +449,7 @@ export const Home: React.FC = () => {
               spaceBetween={24}
               slidesPerView={1}
               navigation
+              centerInsufficientSlides={true}
               pagination={{ clickable: true }}
               autoplay={{ delay: 4000, disableOnInteraction: false }}
               breakpoints={{
@@ -494,7 +501,7 @@ export const Home: React.FC = () => {
           <p className="text-sm tracking-wider text-gray-600 leading-relaxed font-light">
             Every Aurelia creation is handcrafted with extreme precision and devotion. We use only sustainably sourced 18K solid gold, conflict-free fine diamonds, and carefully selected natural gemstones.
           </p>
-          
+
           <div className="grid grid-cols-2 gap-6 pt-4">
             <div className="flex gap-3 items-start">
               <ShieldCheck className="h-6 w-6 text-[#c5a880] flex-shrink-0" />
