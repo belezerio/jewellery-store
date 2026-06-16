@@ -74,7 +74,7 @@ export const Collection: React.FC = () => {
         ) : (
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=800')] bg-cover bg-center opacity-30" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0f2e24]/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0b3c2a]/70" />
         <div className="relative space-y-3 max-w-2xl">
           <span className="text-[10px] tracking-[0.35em] text-[#e6c89c] uppercase font-bold block">
             Exclusive Selection
@@ -103,8 +103,8 @@ export const Collection: React.FC = () => {
               }}
               className={`px-4 py-1.5 border text-xs tracking-wider rounded-full font-medium transition-all duration-300 ${
                 selectedType === type
-                  ? 'bg-[#0f2e24] text-[#faf9f6] border-[#0f2e24] shadow-sm'
-                  : 'bg-white text-gray-700 border-[#e6c89c]/20 hover:border-[#c5a880]'
+                  ? 'bg-[#0b3c2a] text-[#faf9f6] border-[#0b3c2a] shadow-sm'
+                  : 'bg-white text-gray-700 border-[#e6c89c]/20 hover:border-[#b39359]'
               }`}
             >
               {type}
@@ -115,7 +115,7 @@ export const Collection: React.FC = () => {
         {/* Sort drop downs */}
         <div className="flex gap-4 items-center w-full md:w-auto">
           <div className="flex items-center gap-2 border border-gray-200 rounded-full px-4 py-2 bg-white w-full md:w-auto shadow-sm">
-            <ArrowDownAZ className="h-4 w-4 text-[#c5a880]" />
+            <ArrowDownAZ className="h-4 w-4 text-[#b39359]" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
@@ -160,7 +160,7 @@ export const Collection: React.FC = () => {
             <div className="text-center pt-8">
               <button
                 onClick={loadMore}
-                className="inline-flex items-center gap-2 border border-[#0f2e24] text-[#0f2e24] font-semibold text-xs tracking-widest px-8 py-3.5 rounded-full hover:bg-[#0f2e24] hover:text-[#faf9f6] transition-all duration-300"
+                className="inline-flex items-center gap-2 border border-[#0b3c2a] text-[#0b3c2a] font-semibold text-xs tracking-widest px-8 py-3.5 rounded-full hover:bg-[#0b3c2a] hover:text-[#faf9f6] transition-all duration-300"
               >
                 LOAD MORE ITEMS
               </button>

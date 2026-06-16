@@ -5,13 +5,14 @@
 @layer base {
   :root {
     --color-gold-light: #e6c89c;
-    --color-gold: #c5a880;
+    --color-gold: #b39359;
     --color-gold-dark: #a88a5e;
-    --color-emerald: #0f2e24;
+    --color-emerald: #0b3c2a;
     --color-charcoal: #1c1c1c;
-    --color-cream: #faf9f6;
+    --color-cream: #faf8f5;
     --font-serif: 'Cormorant Garamond', serif;
     --font-sans: 'Outfit', sans-serif;
+    --font-script: 'Alex Brush', cursive;
   }
 
   body {
@@ -22,6 +23,10 @@
 
   h1, h2, h3, h4, h5, h6, .font-serif {
     font-family: var(--font-serif);
+  }
+
+  .font-script {
+    font-family: var(--font-script);
   }
 }
 

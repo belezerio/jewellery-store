@@ -76,12 +76,12 @@ export const SearchModal: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             {/* Header / Close Row */}
             <div className="flex justify-between items-center mb-12">
-              <span className="font-serif text-2xl tracking-widest text-[#0f2e24] font-semibold">
-                AURELIA
+              <span className="font-serif text-3xl tracking-wide text-[#0b3c2a] font-bold lowercase flex items-center">
+                isya<span className="text-[10px] text-[#b39359] ml-0.5 select-none relative -top-1.5">•</span>
               </span>
               <button
                 onClick={() => setSearchOpen(false)}
-                className="flex items-center gap-2 text-sm tracking-wider text-[#1c1c1c] hover:text-[#c5a880] transition-colors duration-300"
+                className="flex items-center gap-2 text-sm tracking-wider text-[#1c1c1c] hover:text-[#b39359] transition-colors duration-300"
               >
                 <span>CLOSE</span>
                 <X className="h-5 w-5" />
@@ -89,9 +89,9 @@ export const SearchModal: React.FC = () => {
             </div>
 
             {/* Input Bar */}
-            <div className="relative border-b-2 border-[#c5a880]/30 pb-4 mb-8">
+            <div className="relative border-b-2 border-[#b39359]/30 pb-4 mb-8">
               <div className="flex items-center">
-                <Search className="h-7 w-7 text-[#c5a880] mr-4" />
+                <Search className="h-7 w-7 text-[#b39359] mr-4" />
                 <input
                   ref={inputRef}
                   type="text"
@@ -102,7 +102,7 @@ export const SearchModal: React.FC = () => {
                   className="w-full bg-transparent border-none text-[#1c1c1c] placeholder-gray-400 focus:outline-none focus:ring-0 text-xl md:text-2xl tracking-widest font-serif"
                 />
                 {isLoading && (
-                  <Loader2 className="h-6 w-6 text-[#c5a880] animate-spin ml-4" />
+                  <Loader2 className="h-6 w-6 text-[#b39359] animate-spin ml-4" />
                 )}
               </div>
             </div>
@@ -122,7 +122,7 @@ export const SearchModal: React.FC = () => {
                       <button
                         key={term}
                         onClick={() => handleSuggestionClick(term)}
-                        className="px-4 py-2 bg-white hover:bg-[#0f2e24] hover:text-[#faf9f6] border border-[#e6c89c]/20 hover:border-[#0f2e24] transition-all duration-300 text-xs tracking-wider rounded-full text-gray-700 shadow-sm"
+                        className="px-4 py-2 bg-white hover:bg-[#0b3c2a] hover:text-[#faf9f6] border border-[#e6c89c]/20 hover:border-[#0b3c2a] transition-all duration-300 text-xs tracking-wider rounded-full text-gray-700 shadow-sm"
                       >
                         {term}
                       </button>
@@ -150,9 +150,9 @@ export const SearchModal: React.FC = () => {
                         <li key={term}>
                           <button
                             onClick={() => handleSuggestionClick(term)}
-                            className="text-sm tracking-wide text-gray-600 hover:text-[#c5a880] transition-colors duration-300 flex items-center"
+                            className="text-sm tracking-wide text-gray-600 hover:text-[#b39359] transition-colors duration-300 flex items-center"
                           >
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880] mr-2" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#b39359] mr-2" />
                             {term}
                           </button>
                         </li>
@@ -166,7 +166,7 @@ export const SearchModal: React.FC = () => {
               <div className="lg:col-span-3">
                 {debouncedTerm.trim().length > 0 ? (
                   <div>
-                    <h3 className="font-serif text-lg tracking-wider text-[#0f2e24] mb-6 border-b border-gray-100 pb-2">
+                    <h3 className="font-serif text-lg tracking-wider text-[#0b3c2a] mb-6 border-b border-gray-100 pb-2">
                       Search Results for "{debouncedTerm}" ({results?.length || 0})
                     </h3>
                     {results && results.length > 0 ? (
@@ -192,7 +192,7 @@ export const SearchModal: React.FC = () => {
                   </div>
                 ) : (
                   <div className="flex flex-col items-center justify-center py-20 border border-dashed border-gray-200 rounded-lg bg-white/50">
-                    <Search className="h-12 w-12 text-[#c5a880] mb-4 opacity-50" />
+                    <Search className="h-12 w-12 text-[#b39359] mb-4 opacity-50" />
                     <p className="font-serif text-lg text-gray-500 tracking-wide">
                       Start typing to discover luxury pieces
                     </p>

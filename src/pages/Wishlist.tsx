@@ -11,8 +11,8 @@ export const Wishlist: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10 min-h-[60vh]">
       {/* Header */}
       <div className="text-center space-y-3">
-        <Heart className="h-10 w-10 text-[#c5a880] mx-auto fill-current" />
-        <h1 className="font-serif text-3xl sm:text-4xl tracking-widest text-[#0f2e24] uppercase font-semibold">
+        <Heart className="h-10 w-10 text-[#b39359] mx-auto fill-current" />
+        <h1 className="font-serif text-3xl sm:text-4xl tracking-widest text-[#0b3c2a] uppercase font-semibold">
           My Saved Pieces
         </h1>
         <p className="text-xs tracking-wider text-gray-500 max-w-md mx-auto font-light">
@@ -27,7 +27,7 @@ export const Wishlist: React.FC = () => {
           </p>
           <Link
             to="/collection/asset-pack-47843966978-example-products"
-            className="inline-flex items-center gap-2 bg-[#0f2e24] text-[#faf9f6] font-semibold text-xs tracking-widest px-8 py-3.5 rounded-full hover:bg-[#c5a880] transition-colors duration-300 shadow"
+            className="inline-flex items-center gap-2 bg-[#0b3c2a] text-[#faf9f6] font-semibold text-xs tracking-widest px-8 py-3.5 rounded-full hover:bg-[#b39359] transition-colors duration-300 shadow"
           >
             DISCOVER PIECES
             <ArrowRight className="h-4 w-4" />

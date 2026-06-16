@@ -14,7 +14,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { mutate: addToCartMut, isPending: isAdding } = useAddToCart();
   const wishlisted = isInWishlist(product.handle);
 
-  const mainImage = product.images?.edges?.[0]?.node?.url || 'https://via.placeholder.com/400x500?text=Aurelia+Jewelry';
+  const mainImage = product.images?.edges?.[0]?.node?.url || 'https://via.placeholder.com/400x500?text=Isya+Jewelry';
   const hoverImage = product.images?.edges?.[1]?.node?.url || mainImage;
   const price = product.priceRange?.minVariantPrice;
   const compareAtPrice = product.variants?.edges?.[0]?.node?.compareAtPrice;
@@ -52,7 +52,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="group relative flex flex-col overflow-hidden bg-white border border-[#e6c89c]/20 hover:shadow-lg hover:shadow-[#c5a880]/5 transition-all duration-500 rounded-lg">
+    <div className="group relative flex flex-col overflow-hidden bg-white border border-[#e6c89c]/20 hover:shadow-lg hover:shadow-[#b39359]/5 transition-all duration-500 rounded-lg">
       <Link to={`/product/${product.handle}`} className="relative aspect-[4/5] w-full overflow-hidden bg-gray-50 block">
         {/* Bestseller Badge */}
         {isBestseller && (
@@ -96,7 +96,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <button
             onClick={handleAddToCart}
             disabled={isAdding}
-            className="w-full flex items-center justify-center gap-2 rounded-full bg-[#0f2e24] px-4 py-2.5 text-xs font-semibold tracking-wider text-[#faf9f6] hover:bg-[#c5a880] transition-colors duration-300 shadow-md"
+            className="w-full flex items-center justify-center gap-2 rounded-full bg-[#0b3c2a] px-4 py-2.5 text-xs font-semibold tracking-wider text-[#faf9f6] hover:bg-[#b39359] transition-colors duration-300 shadow-md"
           >
             <ShoppingBag className="h-4 w-4" />
             {isAdding ? 'ADDING...' : 'QUICK ADD'}
@@ -108,11 +108,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <span className="text-[10px] uppercase tracking-widest text-[#a88a5e] mb-1 font-medium">
           {product.productType || 'Jewellery'}
         </span>
-        <h3 className="text-sm font-semibold text-[#1c1c1c] tracking-wide line-clamp-1 group-hover:text-[#c5a880] transition-colors duration-300">
+        <h3 className="text-sm font-semibold text-[#1c1c1c] tracking-wide line-clamp-1 group-hover:text-[#b39359] transition-colors duration-300">
           <Link to={`/product/${product.handle}`}>{product.title}</Link>
         </h3>
         <div className="mt-2 flex items-baseline gap-2">
-          <p className="text-sm font-semibold text-[#0f2e24]">
+          <p className="text-sm font-semibold text-isya-green">
             {price ? formatPrice(price.amount, price.currencyCode) : ''}
           </p>
           {compareAtPrice && (
@@ -122,7 +122,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           )}
         </div>
         {compareAtPrice && (
-          <p className="text-[9px] font-bold text-[#82132d] uppercase tracking-wider mt-1.5 animate-pulse">
+          <p className="text-[9px] font-bold text-isya-gold uppercase tracking-wider mt-1.5 animate-pulse">
             PRICE DROP!
           </p>
         )}

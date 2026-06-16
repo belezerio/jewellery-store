@@ -39,8 +39,8 @@ export const ProductDetail: React.FC = () => {
   if (isLoading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 flex flex-col items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#c5a880] mb-4" />
-        <p className="font-serif tracking-widest text-[#0f2e24] text-sm uppercase">Unveiling Jewellery Details...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#b39359] mb-4" />
+        <p className="font-serif tracking-widest text-[#0b3c2a] text-sm uppercase">Unveiling Jewellery Details...</p>
       </div>
     );
   }
@@ -49,7 +49,7 @@ export const ProductDetail: React.FC = () => {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center min-h-[50vh]">
         <h2 className="font-serif text-2xl text-red-700 mb-4">Failed to load product details</h2>
-        <Link to="/" className="text-sm font-semibold tracking-wider text-[#0f2e24] hover:underline uppercase">
+        <Link to="/" className="text-sm font-semibold tracking-wider text-[#0b3c2a] hover:underline uppercase">
           Back to Home Page
         </Link>
       </div>
@@ -103,11 +103,11 @@ export const ProductDetail: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
       {/* Breadcrumbs */}
       <nav className="text-[10px] tracking-[0.25em] text-gray-500 uppercase flex gap-2">
-        <Link to="/" className="hover:text-[#c5a880] transition-colors">Home</Link>
+        <Link to="/" className="hover:text-[#b39359] transition-colors">Home</Link>
         <span>/</span>
-        <Link to="/collection/asset-pack-47843966978-example-products" className="hover:text-[#c5a880] transition-colors">Collections</Link>
+        <Link to="/collection/asset-pack-47843966978-example-products" className="hover:text-[#b39359] transition-colors">Collections</Link>
         <span>/</span>
-        <span className="text-[#0f2e24] font-semibold">{product.title}</span>
+        <span className="text-[#0b3c2a] font-semibold">{product.title}</span>
       </nav>
 
       {/* Main Grid */}
@@ -123,7 +123,7 @@ export const ProductDetail: React.FC = () => {
                   onClick={() => setActiveImageIndex(idx)}
                   className={`aspect-square w-16 md:w-full border rounded-md overflow-hidden bg-gray-50 flex-shrink-0 transition-all ${
                     idx === activeImageIndex
-                      ? 'border-[#c5a880] ring-1 ring-[#c5a880]'
+                      ? 'border-[#b39359] ring-1 ring-[#b39359]'
                       : 'border-[#e6c89c]/20 hover:border-gray-400'
                   }`}
                 >
@@ -154,14 +154,14 @@ export const ProductDetail: React.FC = () => {
             <span className="text-xs tracking-[0.3em] text-[#a88a5e] uppercase font-semibold">
               {product.productType || 'Fine Jewellery'}
             </span>
-            <h1 className="font-serif text-3xl md:text-4xl text-[#0f2e24] tracking-wide font-semibold leading-tight">
+            <h1 className="font-serif text-3xl md:text-4xl text-[#0b3c2a] tracking-wide font-semibold leading-tight">
               {product.title}
             </h1>
           </div>
 
           {/* Pricing */}
           <div className="flex items-baseline gap-4 border-b border-[#e6c89c]/20 pb-4">
-            <span className="text-2xl font-bold text-[#0f2e24]">
+            <span className="text-2xl font-bold text-[#0b3c2a]">
               {price ? formatPrice(price.amount, price.currencyCode) : ''}
             </span>
             {comparePrice && (
@@ -188,8 +188,8 @@ export const ProductDetail: React.FC = () => {
                           onClick={() => handleOptionChange(opt.name, val)}
                           className={`px-4 py-2 border text-xs tracking-wider rounded-md transition-all duration-300 font-medium ${
                             isSelected
-                              ? 'bg-[#0f2e24] text-[#faf9f6] border-[#0f2e24] shadow-sm'
-                              : 'bg-white text-gray-700 border-[#e6c89c]/20 hover:border-[#c5a880]'
+                              ? 'bg-[#0b3c2a] text-[#faf9f6] border-[#0b3c2a] shadow-sm'
+                              : 'bg-white text-gray-700 border-[#e6c89c]/20 hover:border-[#b39359]'
                           }`}
                         >
                           {val}
@@ -209,7 +209,7 @@ export const ProductDetail: React.FC = () => {
               disabled={isAdding || !activeVariant?.availableForSale}
               className={`flex-1 flex items-center justify-center gap-2 rounded-full py-4 text-xs font-semibold tracking-widest text-[#faf9f6] transition-all duration-300 shadow-md ${
                 activeVariant?.availableForSale
-                  ? 'bg-[#0f2e24] hover:bg-[#c5a880]'
+                  ? 'bg-[#0b3c2a] hover:bg-[#b39359]'
                   : 'bg-gray-400 cursor-not-allowed'
               }`}
             >
@@ -222,7 +222,7 @@ export const ProductDetail: React.FC = () => {
               className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-300 ${
                 wishlisted
                   ? 'border-red-500 bg-red-50 text-red-500 scale-105'
-                  : 'border-gray-200 hover:border-[#c5a880] text-gray-500'
+                  : 'border-gray-200 hover:border-[#b39359] text-gray-500'
               }`}
               aria-label="Toggle Wishlist"
             >
@@ -233,15 +233,15 @@ export const ProductDetail: React.FC = () => {
           {/* Trust points */}
           <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#e6c89c]/20 text-center">
             <div className="flex flex-col items-center space-y-1.5">
-              <Truck className="h-5 w-5 text-[#c5a880]" />
+              <Truck className="h-5 w-5 text-[#b39359]" />
               <span className="text-[10px] tracking-wider text-gray-600 font-medium">Free Shipping</span>
             </div>
             <div className="flex flex-col items-center space-y-1.5">
-              <RotateCcw className="h-5 w-5 text-[#c5a880]" />
+              <RotateCcw className="h-5 w-5 text-[#b39359]" />
               <span className="text-[10px] tracking-wider text-gray-600 font-medium">30-Day Returns</span>
             </div>
             <div className="flex flex-col items-center space-y-1.5">
-              <Shield className="h-5 w-5 text-[#c5a880]" />
+              <Shield className="h-5 w-5 text-[#b39359]" />
               <span className="text-[10px] tracking-wider text-gray-600 font-medium">Lifetime Warranty</span>
             </div>
           </div>
@@ -266,7 +266,7 @@ export const ProductDetail: React.FC = () => {
                 title: 'Shipping & Complimentary Gift Wrap',
                 content: (
                   <p className="text-xs text-gray-600 font-light tracking-wider leading-relaxed">
-                    All Aurelia shipments are completely insured and transit-protected. Arrives in our signature velvet casket box with a certificate of authenticity and custom greetings.
+                    All ISYA shipments are completely insured and transit-protected. Arrives in our signature velvet casket box with a certificate of authenticity and custom greetings.
                   </p>
                 )
               }
@@ -276,7 +276,7 @@ export const ProductDetail: React.FC = () => {
                 <div key={accordion.id} className="border-b border-gray-100 pb-2">
                   <button
                     onClick={() => setActiveAccordion(isOpen ? null : accordion.id)}
-                    className="w-full flex justify-between items-center py-2 text-left font-serif text-sm font-semibold tracking-wide text-[#0f2e24] hover:text-[#c5a880] transition-colors"
+                    className="w-full flex justify-between items-center py-2 text-left font-serif text-sm font-semibold tracking-wide text-[#0b3c2a] hover:text-[#b39359] transition-colors"
                   >
                     <span>{accordion.title}</span>
                     <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
@@ -297,11 +297,11 @@ export const ProductDetail: React.FC = () => {
       {relatedProducts.length > 0 && (
         <div className="pt-10 border-t border-[#e6c89c]/20">
           <div className="text-center mb-10">
-            <Sparkles className="h-6 w-6 text-[#c5a880] mx-auto mb-2" />
-            <h2 className="font-serif text-2xl sm:text-3xl tracking-widest text-[#0f2e24]">
+            <Sparkles className="h-6 w-6 text-[#b39359] mx-auto mb-2" />
+            <h2 className="font-serif text-2xl sm:text-3xl tracking-widest text-[#0b3c2a]">
               You May Also Design
             </h2>
-            <div className="w-12 h-[1.5px] bg-[#c5a880] mx-auto mt-2" />
+            <div className="w-12 h-[1.5px] bg-[#b39359] mx-auto mt-2" />
           </div>
 
           <Swiper

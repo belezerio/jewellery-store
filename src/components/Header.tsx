@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
           <div className="flex lg:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-[#1c1c1c] hover:text-[#c5a880] transition-colors p-1"
+              className="text-[#1c1c1c] hover:text-[#b39359] transition-colors p-1"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -57,9 +57,10 @@ export const Header: React.FC = () => {
           {/* Left: Brand / Logo */}
           <Link
             to="/"
-            className="font-serif text-2xl sm:text-3xl tracking-[0.2em] text-[#0f2e24] font-bold hover:text-[#c5a880] transition-all duration-300"
+            className="font-serif text-3xl tracking-wide text-[#0b3c2a] font-bold hover:text-[#b39359] transition-all duration-300 lowercase relative flex items-center"
           >
-            AURELIA
+            isya
+            <span className="text-[10px] text-[#b39359] ml-0.5 select-none relative -top-1.5">•</span>
           </Link>
 
           {/* Center: Desktop Navigation */}
@@ -68,11 +69,11 @@ export const Header: React.FC = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-xs font-semibold tracking-widest text-[#1c1c1c] hover:text-[#c5a880] transition-colors duration-300 relative py-1 group"
+                className="text-xs font-semibold tracking-widest text-[#1c1c1c] hover:text-[#b39359] transition-colors duration-300 relative py-1 group"
               >
                 {link.name}
                 <span
-                  className={`absolute bottom-0 left-0 w-full h-[1.5px] bg-[#c5a880] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ${
+                  className={`absolute bottom-0 left-0 w-full h-[1.5px] bg-[#b39359] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ${
                     location.pathname === link.path ? 'scale-x-100' : ''
                   }`}
                 />
@@ -85,7 +86,7 @@ export const Header: React.FC = () => {
             {/* Search */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="text-[#1c1c1c] hover:text-[#c5a880] transition-all duration-300 p-1 hover:scale-105"
+              className="text-[#1c1c1c] hover:text-[#b39359] transition-all duration-300 p-1 hover:scale-105"
               aria-label="Search Store"
             >
               <Search className="h-5.5 w-5.5 sm:h-6 sm:w-6" />
@@ -94,12 +95,12 @@ export const Header: React.FC = () => {
             {/* Wishlist */}
             <Link
               to="/wishlist"
-              className="text-[#1c1c1c] hover:text-[#c5a880] transition-all duration-300 p-1 relative hover:scale-105"
+              className="text-[#1c1c1c] hover:text-[#b39359] transition-all duration-300 p-1 relative hover:scale-105"
               aria-label="View Wishlist"
             >
               <Heart className="h-5.5 w-5.5 sm:h-6 sm:w-6" />
               {wishlistCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#c5a880] text-white text-[8px] font-sans font-bold w-4 h-4 rounded-full flex items-center justify-center animate-pulse">
+                <span className="absolute -top-1 -right-1 bg-[#b39359] text-white text-[8px] font-sans font-bold w-4 h-4 rounded-full flex items-center justify-center animate-pulse">
                   {wishlistCount}
                 </span>
               )}
@@ -108,12 +109,12 @@ export const Header: React.FC = () => {
             {/* Cart */}
             <button
               onClick={() => setCartOpen(true)}
-              className="text-[#1c1c1c] hover:text-[#c5a880] transition-all duration-300 p-1 relative hover:scale-105"
+              className="text-[#1c1c1c] hover:text-[#b39359] transition-all duration-300 p-1 relative hover:scale-105"
               aria-label="Open Cart"
             >
               <ShoppingBag className="h-5.5 w-5.5 sm:h-6 sm:w-6" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#0f2e24] text-[#faf9f6] text-[8px] font-sans font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-[#0b3c2a] text-[#faf9f6] text-[8px] font-sans font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
@@ -129,7 +130,7 @@ export const Header: React.FC = () => {
             <Link
               key={link.name}
               to={link.path}
-              className="text-xs font-semibold tracking-widest text-[#1c1c1c] hover:text-[#c5a880] transition-colors py-2 border-b border-gray-50"
+              className="text-xs font-semibold tracking-widest text-[#1c1c1c] hover:text-[#b39359] transition-colors py-2 border-b border-gray-50"
             >
               {link.name}
             </Link>

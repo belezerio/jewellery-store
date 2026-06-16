@@ -4,16 +4,16 @@ import { Mail, Phone, MapPin, Compass } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#0f2e24] text-[#faf9f6] pt-16 pb-8 border-t border-[#e6c89c]/10">
+    <footer className="bg-[#0b3c2a] text-[#faf9f6] pt-16 pb-8 border-t border-[#e6c89c]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         
         {/* Branding Column */}
         <div className="space-y-4">
-          <h2 className="font-serif text-3xl tracking-[0.2em] font-bold text-[#e6c89c]">
-            AURELIA
+          <h2 className="font-serif text-3xl tracking-wide font-bold text-[#e6c89c] lowercase flex items-center">
+            isya<span className="text-[10px] text-[#e6c89c] ml-0.5 select-none relative -top-1.5">•</span>
           </h2>
           <p className="text-xs tracking-wider text-gray-300 leading-relaxed font-light">
-            Crafting luxury hand-finished fine jewellery since 2012. Our pieces reflect timeless beauty, ethical sourcing, and modern craftsmanship.
+            Crafting premium sterling silver and lab-grown diamond jewellery for GenZ. Modern design, ethical sourcing, and a smart buy-back guarantee.
           </p>
           <div className="flex space-x-4 pt-2">
             <a href="#" className="text-gray-300 hover:text-[#e6c89c] transition-colors duration-300">
@@ -95,11 +95,11 @@ export const Footer: React.FC = () => {
           <ul className="space-y-3 text-xs tracking-wider text-gray-300">
             <li className="flex items-center gap-3">
               <Phone className="h-4 w-4 text-[#e6c89c]" />
-              <span>+1 (800) AURELIA</span>
+              <span>+1 (800) ISYA-JEWELS</span>
             </li>
             <li className="flex items-center gap-3">
               <Mail className="h-4 w-4 text-[#e6c89c]" />
-              <span>concierge@aurelia.com</span>
+              <span>hello@isyajewels.com</span>
             </li>
             <li className="flex items-start gap-3">
               <MapPin className="h-4 w-4 text-[#e6c89c] mt-0.5" />
@@ -116,7 +116,7 @@ export const Footer: React.FC = () => {
       {/* Bottom copyright row */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-white/5 text-center flex flex-col sm:flex-row justify-between items-center gap-4">
         <p className="text-[10px] tracking-widest text-gray-400">
-          &copy; {new Date().getFullYear()} AURELIA JEWELLERY. ALL RIGHTS RESERVED.
+          &copy; {new Date().getFullYear()} ISYA JEWELS. ALL RIGHTS RESERVED.
         </p>
         <p className="text-[10px] tracking-widest text-gray-400">
           DEVELOPED SECURELY WITH SHOPIFY HEADLESS COMMERCE.
