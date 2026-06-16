@@ -85,7 +85,7 @@ export const Home: React.FC = () => {
             {/* Silk/Smoke luxury background */}
             <div
               className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-overlay scale-105"
-              style={{ backgroundImage: `url('/luxury-smoke.png')` }}
+              style={{ backgroundImage: `url('/luxury-smoke.webp')` }}
             />
             
             {/* Ambient golden glows */}
@@ -207,7 +207,7 @@ export const Home: React.FC = () => {
                   className="relative w-full h-full rounded-[40px] overflow-hidden shadow-2xl border-4 border-white/60 bg-[#e3d8cd]"
                 >
                   <img
-                    src="/hero-model.png"
+                    src="/hero-model.webp"
                     alt="Isya Premium Luxury Portrait"
                     className="w-full h-full object-cover transition-transform duration-[4s] ease-out group-hover/portrait:scale-105"
                   />
@@ -221,7 +221,7 @@ export const Home: React.FC = () => {
                     animate={!isLoading ? { opacity: 0, scale: 1.25, filter: 'blur(20px)' } : {}}
                     transition={{ duration: 2.2, ease: 'easeOut' }}
                     className="absolute inset-0 bg-cover bg-center mix-blend-color-burn z-10 pointer-events-none"
-                    style={{ backgroundImage: `url('/luxury-smoke.png')` }}
+                    style={{ backgroundImage: `url('/luxury-smoke.webp')` }}
                   />
                 </motion.div>
                 
@@ -309,14 +309,14 @@ export const Home: React.FC = () => {
           className="category-swiper pb-4"
         >
           {[
-            { name: 'Rings', handle: 'frontpage', img: '/categories/rings.png' },
-            { name: 'Bracelets', handle: 'frontpage', img: '/categories/bracelets.png' },
-            { name: 'Pendants', handle: 'frontpage', img: '/categories/pendants.png' },
-            { name: 'Earrings', handle: 'frontpage', img: '/categories/earrings.png' },
-            { name: 'Men in Silver', handle: 'frontpage', img: '/categories/men.png' },
-            { name: 'Sets', handle: 'frontpage', img: '/categories/sets.png' },
-            { name: 'Anklets', handle: 'frontpage', img: '/categories/anklets.png' },
-            { name: 'Silver Chains', handle: 'frontpage', img: '/categories/chains.png' },
+            { name: 'Rings', handle: 'frontpage', img: '/categories/rings.webp' },
+            { name: 'Bracelets', handle: 'frontpage', img: '/categories/bracelets.webp' },
+            { name: 'Pendants', handle: 'frontpage', img: '/categories/pendants.webp' },
+            { name: 'Earrings', handle: 'frontpage', img: '/categories/earrings.webp' },
+            { name: 'Men in Silver', handle: 'frontpage', img: '/categories/men.webp' },
+            { name: 'Sets', handle: 'frontpage', img: '/categories/sets.webp' },
+            { name: 'Anklets', handle: 'frontpage', img: '/categories/anklets.webp' },
+            { name: 'Silver Chains', handle: 'frontpage', img: '/categories/chains.webp' },
           ].map((cat, idx) => (
             <SwiperSlide key={idx}>
               <Link to={`/collection/${cat.handle}`} className="group text-center block">
@@ -405,7 +405,7 @@ export const Home: React.FC = () => {
           <div className="relative overflow-hidden group bg-gradient-to-t from-[#f6ebe1] to-[#faf9f6] rounded-[24px] border border-[#e6c89c]/15 p-6 flex flex-col justify-between items-center text-center h-[350px] md:h-[400px]">
             <div className="absolute bottom-0 w-[80%] h-[85%] bg-[#ecdac9] rounded-t-[140px] z-0" />
             <img
-              src="/man.png"
+              src="/man.webp"
               alt="Shop For Him"
               className="absolute bottom-0 h-[80%] object-contain z-10 transition-transform duration-700 group-hover:scale-103"
             />
@@ -422,7 +422,7 @@ export const Home: React.FC = () => {
           <div className="relative overflow-hidden group bg-gradient-to-t from-[#f6ebe1] to-[#faf9f6] rounded-[24px] border border-[#e6c89c]/15 p-6 flex flex-col justify-between items-center text-center h-[350px] md:h-[400px]">
             <div className="absolute bottom-0 w-[80%] h-[85%] bg-[#ecdac9] rounded-t-[140px] z-0" />
             <img
-              src="/girl.png"
+              src="/girl.webp"
               alt="Shop For Her"
               className="absolute bottom-0 h-[80%] object-contain z-10 transition-transform duration-700 group-hover:scale-103"
             />
@@ -442,7 +442,7 @@ export const Home: React.FC = () => {
         {/* Soft elegant glows and smoke trails */}
         <div
           className="absolute inset-0 bg-cover bg-center opacity-10 mix-blend-overlay pointer-events-none"
-          style={{ backgroundImage: `url('/luxury-smoke.png')` }}
+          style={{ backgroundImage: `url('/luxury-smoke.webp')` }}
         />
         <div className="absolute w-[400px] h-[400px] rounded-full bg-[#faf5ef]/5 blur-[120px] -top-20 -right-20 pointer-events-none" />
         <div className="absolute w-[400px] h-[400px] rounded-full bg-[#b39359]/10 blur-[120px] -bottom-20 -left-20 pointer-events-none" />
