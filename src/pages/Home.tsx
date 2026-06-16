@@ -405,7 +405,7 @@ export const Home: React.FC = () => {
           <div className="relative overflow-hidden group bg-gradient-to-t from-[#f6ebe1] to-[#faf9f6] rounded-[24px] border border-[#e6c89c]/15 p-6 flex flex-col justify-between items-center text-center h-[350px] md:h-[400px]">
             <div className="absolute bottom-0 w-[80%] h-[85%] bg-[#ecdac9] rounded-t-[140px] z-0" />
             <img
-              src="../../public/man.png"
+              src="/man.png"
               alt="Shop For Him"
               className="absolute bottom-0 h-[80%] object-contain z-10 transition-transform duration-700 group-hover:scale-103"
             />
@@ -422,7 +422,7 @@ export const Home: React.FC = () => {
           <div className="relative overflow-hidden group bg-gradient-to-t from-[#f6ebe1] to-[#faf9f6] rounded-[24px] border border-[#e6c89c]/15 p-6 flex flex-col justify-between items-center text-center h-[350px] md:h-[400px]">
             <div className="absolute bottom-0 w-[80%] h-[85%] bg-[#ecdac9] rounded-t-[140px] z-0" />
             <img
-              src="../../public/girl.png"
+              src="/girl.png"
               alt="Shop For Her"
               className="absolute bottom-0 h-[80%] object-contain z-10 transition-transform duration-700 group-hover:scale-103"
             />
