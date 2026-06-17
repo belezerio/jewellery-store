@@ -33,6 +33,18 @@ export const SearchModal: React.FC = () => {
     }
   }, [isSearchOpen]);
 
+  // Lock body scroll when search is open
+  useEffect(() => {
+    if (isSearchOpen) {
+      document.body.classList.add('scroll-locked');
+    } else {
+      document.body.classList.remove('scroll-locked');
+    }
+    return () => {
+      document.body.classList.remove('scroll-locked');
+    };
+  }, [isSearchOpen]);
+
   const { data: results, isLoading } = useSearch(debouncedTerm, 8);
 
   const saveSearch = (term: string) => {
@@ -99,7 +111,7 @@ export const SearchModal: React.FC = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="w-full bg-transparent border-none text-[#1c1c1c] placeholder-gray-400 focus:outline-none focus:ring-0 text-xl md:text-2xl tracking-widest font-serif"
+                  className="w-full bg-transparent border-none text-[#1c1c1c] placeholder-gray-400 focus:outline-none focus:ring-0 text-base sm:text-lg md:text-2xl tracking-widest font-serif"
                 />
                 {isLoading && (
                   <Loader2 className="h-6 w-6 text-[#b39359] animate-spin ml-4" />
@@ -170,7 +182,7 @@ export const SearchModal: React.FC = () => {
                       Search Results for "{debouncedTerm}" ({results?.length || 0})
                     </h3>
                     {results && results.length > 0 ? (
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6">
                         {results.map((product) => (
                           <div
                             key={product.id}

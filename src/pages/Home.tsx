@@ -6,6 +6,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { ArrowRight, Star, ArrowUpRight, ShieldCheck, Gem, Sparkles } from 'lucide-react';
 import { useProducts, useCollections } from '../hooks/useShopify';
 import { ProductCard } from '../components/ProductCard';
+import { useStore } from '../store/useStore';
 
 // Swiper Styles
 import 'swiper/css';
@@ -16,28 +17,8 @@ export const Home: React.FC = () => {
   const { data: products, isLoading: productsLoading } = useProducts(8);
   const { data: collections } = useCollections();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
   const [videoOpen, setVideoOpen] = useState(false);
-
-  useEffect(() => {
-    // Dynamic luxury loader progression
-    let current = 0;
-    const interval = setInterval(() => {
-      const step = Math.floor(Math.random() * 15) + 5;
-      current = Math.min(current + step, 100);
-      setProgress(current);
-      if (current === 100) {
-        clearInterval(interval);
-        const timeout = setTimeout(() => {
-          setIsLoading(false);
-        }, 850);
-        return () => clearTimeout(timeout);
-      }
-    }, 70);
-
-    return () => clearInterval(interval);
-  }, []);
+  const startAnimate = useStore((state) => state.startAnimate);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -70,93 +51,42 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <div className="space-y-20 pb-20 overflow-x-hidden">
-      {/* 0. Luxury Preloader Overlay */}
-      <AnimatePresence>
-        {isLoading && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ 
-              opacity: 0, 
-              transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
-            }}
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0d221b] overflow-hidden"
-          >
-            {/* Silk/Smoke luxury background */}
-            <div
-              className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-overlay scale-105"
-              style={{ backgroundImage: `url('/luxury-smoke.webp')` }}
-            />
-            
-            {/* Ambient golden glows */}
-            <div className="absolute w-[500px] h-[500px] bg-[#e6c89c]/10 rounded-full blur-[140px] -top-40 -left-40 pointer-events-none animate-pulse" />
-            <div className="absolute w-[500px] h-[500px] bg-[#b39359]/5 rounded-full blur-[140px] -bottom-40 -right-40 pointer-events-none" />
-
-            <div className="relative text-center z-10 space-y-6">
-              <motion.h1
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1.4, ease: 'easeOut' }}
-                className="font-serif text-5xl text-[#faf9f6] tracking-wide lowercase flex items-center justify-center gap-1 font-bold"
-              >
-                isya<span className="text-xl text-[#b39359] relative -top-3.5 select-none">•</span>
-              </motion.h1>
-              <p className="text-[10px] tracking-[0.35em] text-[#e6c89c] font-light uppercase">
-                Modern Jewellery for GenZ
-              </p>
-              
-              {/* Elegant Line Loader */}
-              <div className="w-56 h-[1px] bg-white/10 mx-auto relative overflow-hidden mt-8">
-                <motion.div
-                  className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#e6c89c] to-[#b39359]"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${progress}%` }}
-                  transition={{ ease: 'easeInOut', duration: 0.1 }}
-                />
-              </div>
-              
-              {/* Percentage counter */}
-              <div className="font-serif text-xs text-[#e6c89c]/70 tracking-[0.2em] pt-2">
-                {progress}%
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <div className="space-y-10 sm:space-y-16 lg:space-y-20 pb-10 sm:pb-20 overflow-x-hidden">
+      {/* Preloader is rendered globally in MainLayout to prevent stacking context viewport offsets */}
 
       {/* 1. Cinematic Hero Section */}
-      <section className="relative min-h-[95vh] lg:h-[100vh] flex items-center bg-[#eae1d8]/40 overflow-hidden pt-24 lg:pt-16 pb-12 lg:pb-0">
+      <section className="relative min-h-[80vh] sm:min-h-[90vh] lg:h-[100vh] flex items-center bg-[#eae1d8]/40 overflow-hidden pt-20 sm:pt-24 lg:pt-16 pb-8 sm:pb-12 lg:pb-0">
         {/* Abstract Gold Background Details */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,#faf5ef_0%,transparent_60%)] pointer-events-none" />
         <div className="absolute w-[500px] h-[500px] rounded-full bg-[#e6c89c]/10 blur-[140px] -top-20 -right-20 pointer-events-none" />
         <div className="absolute w-[400px] h-[400px] rounded-full bg-[#b39359]/5 blur-[120px] -bottom-20 -left-20 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
             
             {/* Left Column (Main Copy & Shortcuts list) - Column 5 */}
-            <div className="lg:col-span-5 text-left space-y-8 lg:space-y-12">
+            <div className="lg:col-span-5 text-left space-y-6 lg:space-y-12">
               <div className="space-y-4">
                 <motion.span
                   initial={{ opacity: 0, y: 15 }}
-                  animate={!isLoading ? { opacity: 1, y: 0 } : {}}
+                  animate={startAnimate ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="font-serif italic text-lg sm:text-xl text-[#b39359] tracking-wide block"
+                  className="font-serif italic text-base sm:text-xl text-[#b39359] tracking-wide block"
                 >
                   The original
                 </motion.span>
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
-                  animate={!isLoading ? { opacity: 1, y: 0 } : {}}
+                  animate={startAnimate ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-5xl sm:text-7xl lg:text-[5.5rem] font-serif tracking-tight text-[#0b3c2a] leading-[1.05] font-bold"
+                  className="text-4xl sm:text-6xl lg:text-[5.5rem] font-serif tracking-tight text-[#0b3c2a] leading-[1.05] font-bold"
                 >
                   Shine <br />
                   <span className="italic font-normal">bright.</span>
                 </motion.h1>
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
-                  animate={!isLoading ? { opacity: 1, y: 0 } : {}}
+                  animate={startAnimate ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.8, delay: 0.6 }}
                   className="pt-4"
                 >
@@ -173,7 +103,7 @@ export const Home: React.FC = () => {
               {/* Bottom Left Navigation Shortcuts */}
               <motion.div
                 initial={{ opacity: 0, x: -25 }}
-                animate={!isLoading ? { opacity: 1, x: 0 } : {}}
+                animate={startAnimate ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 1, delay: 0.8 }}
                 className="hidden lg:flex flex-col gap-5 border-l-2 border-[#0b3c2a]/10 pl-6"
               >
@@ -198,11 +128,11 @@ export const Home: React.FC = () => {
 
             {/* Middle Column (Model Image & Smoke Reveal) - Column 5 */}
             <div className="lg:col-span-5 flex justify-center relative">
-              <div className="relative w-full max-w-[350px] sm:max-w-[390px] aspect-[4/5] group/portrait">
+              <div className="relative w-full max-w-[280px] sm:max-w-[350px] md:max-w-[390px] aspect-[4/5] group/portrait mx-auto">
                 {/* Image Frame */}
                 <motion.div
                   initial={{ scale: 1.1, opacity: 0 }}
-                  animate={!isLoading ? { scale: 1, opacity: 1 } : {}}
+                  animate={startAnimate ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
                   className="relative w-full h-full rounded-[40px] overflow-hidden shadow-2xl border-4 border-white/60 bg-[#e3d8cd]"
                 >
@@ -218,7 +148,7 @@ export const Home: React.FC = () => {
                   {/* Dispersing Smoke Overlay */}
                   <motion.div
                     initial={{ opacity: 0.9, scale: 1, filter: 'blur(0px)' }}
-                    animate={!isLoading ? { opacity: 0, scale: 1.25, filter: 'blur(20px)' } : {}}
+                    animate={startAnimate ? { opacity: 0, scale: 1.25, filter: 'blur(20px)' } : {}}
                     transition={{ duration: 2.2, ease: 'easeOut' }}
                     className="absolute inset-0 bg-cover bg-center mix-blend-color-burn z-10 pointer-events-none"
                     style={{ backgroundImage: `url('/luxury-smoke.webp')` }}
@@ -234,10 +164,10 @@ export const Home: React.FC = () => {
             <div className="lg:col-span-2 flex justify-center lg:justify-end">
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
-                animate={!isLoading ? { scale: 1, opacity: 1 } : {}}
+                animate={startAnimate ? { scale: 1, opacity: 1 } : {}}
                 transition={{ duration: 1, delay: 0.9, ease: 'easeOut' }}
                 onClick={() => setVideoOpen(true)}
-                className="w-28 h-28 rounded-full border border-[#b39359]/30 flex items-center justify-center relative cursor-pointer group/play overflow-hidden bg-white/40 backdrop-blur-sm shadow-md hover:border-[#b39359] transition-all duration-500 hover:scale-105"
+                className="w-20 h-20 sm:w-28 sm:h-28 rounded-full border border-[#b39359]/30 flex items-center justify-center relative cursor-pointer group/play overflow-hidden bg-white/40 backdrop-blur-sm shadow-md hover:border-[#b39359] transition-all duration-500 hover:scale-105"
               >
                 {/* Pulsing gold core */}
                 <div className="absolute w-20 h-20 bg-[#e6c89c]/10 rounded-full scale-75 group-hover/play:scale-105 transition-transform duration-500 animate-pulse" />
@@ -287,24 +217,25 @@ export const Home: React.FC = () => {
       )}
 
       {/* 2. Shop by Category (GIVA Style Rounded Widescreen Swiper) */}
-      <section className="w-full px-4 sm:px-8 lg:px-12 relative group">
+      <section className="w-full px-3 sm:px-8 lg:px-12 relative group">
         <div className="text-center mb-10">
-          <h2 className="font-serif text-3xl sm:text-4xl tracking-widest text-[#0b3c2a]">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl tracking-widest text-[#0b3c2a]">
             Shop by Category
           </h2>
-          <div className="w-16 h-[2px] bg-[#b39359] mx-auto mt-3" />
+          <div className="w-12 sm:w-16 h-[2px] bg-[#b39359] mx-auto mt-3" />
         </div>
 
         <Swiper
           modules={[Navigation]}
-          spaceBetween={16}
-          slidesPerView={4}
+          spaceBetween={12}
+          slidesPerView={2.5}
           navigation
           centerInsufficientSlides={true}
           breakpoints={{
-            480: { slidesPerView: 5 },
-            768: { slidesPerView: 7 },
-            1024: { slidesPerView: 8 },
+            400: { slidesPerView: 3, spaceBetween: 14 },
+            640: { slidesPerView: 4, spaceBetween: 16 },
+            768: { slidesPerView: 6, spaceBetween: 16 },
+            1024: { slidesPerView: 8, spaceBetween: 16 },
           }}
           className="category-swiper pb-4"
         >
@@ -342,7 +273,7 @@ export const Home: React.FC = () => {
 
       {/* 2.5. Isya Trust Badges Strip */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {[
             {
               title: '925 Fine Silver',
@@ -385,13 +316,13 @@ export const Home: React.FC = () => {
               ),
             },
           ].map((badge, idx) => (
-            <div key={idx} className="bg-white border border-isya-gold/15 p-5 rounded-2xl flex items-center gap-4 hover:shadow-md transition-shadow duration-300">
-              <div className="w-14 h-14 bg-isya-sand rounded-full flex items-center justify-center shadow-sm border border-isya-gold/10 flex-shrink-0">
+            <div key={idx} className="bg-white border border-isya-gold/15 p-3 sm:p-5 rounded-xl sm:rounded-2xl flex items-center gap-3 sm:gap-4 hover:shadow-md transition-shadow duration-300">
+              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-isya-sand rounded-full flex items-center justify-center shadow-sm border border-isya-gold/10 flex-shrink-0">
                 {badge.icon}
               </div>
               <div>
-                <h4 className="font-sans text-xs sm:text-sm font-bold text-isya-green tracking-wide">{badge.title}</h4>
-                <p className="text-[9px] tracking-wide text-gray-500 uppercase mt-0.5">{badge.desc}</p>
+                <h4 className="font-sans text-[10px] sm:text-sm font-bold text-isya-green tracking-wide leading-tight">{badge.title}</h4>
+                <p className="text-[8px] sm:text-[9px] tracking-wide text-gray-500 uppercase mt-0.5 hidden sm:block">{badge.desc}</p>
               </div>
             </div>
           ))}
@@ -402,7 +333,7 @@ export const Home: React.FC = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Shop For Him */}
-          <div className="relative overflow-hidden group bg-gradient-to-t from-[#f6ebe1] to-[#faf9f6] rounded-[24px] border border-[#e6c89c]/15 p-6 flex flex-col justify-between items-center text-center h-[350px] md:h-[400px]">
+          <div className="relative overflow-hidden group bg-gradient-to-t from-[#f6ebe1] to-[#faf9f6] rounded-[20px] sm:rounded-[24px] border border-[#e6c89c]/15 p-4 sm:p-6 flex flex-col justify-between items-center text-center h-[280px] sm:h-[350px] md:h-[400px]">
             <div className="absolute bottom-0 w-[80%] h-[85%] bg-[#ecdac9] rounded-t-[140px] z-0" />
             <img
               src="/man.webp"
@@ -419,7 +350,7 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Shop For Her */}
-          <div className="relative overflow-hidden group bg-gradient-to-t from-[#f6ebe1] to-[#faf9f6] rounded-[24px] border border-[#e6c89c]/15 p-6 flex flex-col justify-between items-center text-center h-[350px] md:h-[400px]">
+          <div className="relative overflow-hidden group bg-gradient-to-t from-[#f6ebe1] to-[#faf9f6] rounded-[20px] sm:rounded-[24px] border border-[#e6c89c]/15 p-4 sm:p-6 flex flex-col justify-between items-center text-center h-[280px] sm:h-[350px] md:h-[400px]">
             <div className="absolute bottom-0 w-[80%] h-[85%] bg-[#ecdac9] rounded-t-[140px] z-0" />
             <img
               src="/girl.webp"
@@ -438,7 +369,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 2.65. Why Isya - Brand Pillars (Replicating Isya Jewels launch) */}
-      <section className="bg-[#0b3c2a] text-[#faf9f6] py-20 relative overflow-hidden">
+      <section className="bg-[#0b3c2a] text-[#faf9f6] py-12 sm:py-20 relative overflow-hidden">
         {/* Soft elegant glows and smoke trails */}
         <div
           className="absolute inset-0 bg-cover bg-center opacity-10 mix-blend-overlay pointer-events-none"
@@ -447,13 +378,13 @@ export const Home: React.FC = () => {
         <div className="absolute w-[400px] h-[400px] rounded-full bg-[#faf5ef]/5 blur-[120px] -top-20 -right-20 pointer-events-none" />
         <div className="absolute w-[400px] h-[400px] rounded-full bg-[#b39359]/10 blur-[120px] -bottom-20 -left-20 pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-8 sm:space-y-12">
           
           <div className="space-y-3">
             <span className="text-[10px] tracking-[0.4em] text-[#b39359] font-bold uppercase block font-sans">
               Announcing The Launch Of
             </span>
-            <h2 className="font-serif text-5xl tracking-wide lowercase flex items-center justify-center gap-1 font-bold">
+            <h2 className="font-serif text-4xl sm:text-5xl tracking-wide lowercase flex items-center justify-center gap-1 font-bold">
               isya
               <span className="text-xl text-[#b39359] relative -top-3.5 select-none">•</span>
             </h2>
@@ -464,12 +395,12 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Core Green Pillars */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 max-w-3xl mx-auto">
             {/* Card 1: Gold vs Silver */}
             <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.4 }}
-              className="bg-[#05251a] border border-[#b39359]/20 rounded-[32px] p-8 flex flex-col items-center text-center space-y-6 shadow-xl relative group/card"
+              className="bg-[#05251a] border border-[#b39359]/20 rounded-[24px] sm:rounded-[32px] p-6 sm:p-8 flex flex-col items-center text-center space-y-4 sm:space-y-6 shadow-xl relative group/card"
             >
               {/* Ring Icon SVG */}
               <div className="w-16 h-16 rounded-full bg-[#0b3c2a] flex items-center justify-center border border-[#b39359]/25 shadow-inner">
@@ -491,7 +422,7 @@ export const Home: React.FC = () => {
             <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.4 }}
-              className="bg-[#05251a] border border-[#b39359]/20 rounded-[32px] p-8 flex flex-col items-center text-center space-y-6 shadow-xl relative group/card"
+              className="bg-[#05251a] border border-[#b39359]/20 rounded-[24px] sm:rounded-[32px] p-6 sm:p-8 flex flex-col items-center text-center space-y-4 sm:space-y-6 shadow-xl relative group/card"
             >
               {/* Diamond Icon SVG */}
               <div className="w-16 h-16 rounded-full bg-[#0b3c2a] flex items-center justify-center border border-[#b39359]/25 shadow-inner">
@@ -520,7 +451,7 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Surprise Gift Promo Strip */}
-          <div className="bg-gradient-to-r from-[#05251a] via-[#0b3c2a] to-[#05251a] rounded-[24px] border border-[#b39359]/20 p-6 max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+          <div className="bg-gradient-to-r from-[#05251a] via-[#0b3c2a] to-[#05251a] rounded-[20px] sm:rounded-[24px] border border-[#b39359]/20 p-4 sm:p-6 max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 shadow-2xl">
             <div className="flex items-center gap-4">
               {/* Light Green Gift Box Icon */}
               <div className="w-14 h-14 bg-[#144f38] border border-[#b39359]/30 rounded-2xl flex items-center justify-center shadow-lg relative flex-shrink-0">
@@ -546,9 +477,9 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 2.7. GIVA "Everyone's Favourites" Curated Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         {/* Curated Banner */}
-        <div className="relative overflow-hidden bg-gradient-to-r from-[#faf8f5] via-[#eae1d8] to-[#faf8f5] rounded-[24px] border border-isya-gold/20 p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 min-h-[200px]">
+        <div className="relative overflow-hidden bg-gradient-to-r from-[#faf8f5] via-[#eae1d8] to-[#faf8f5] rounded-[20px] sm:rounded-[24px] border border-isya-gold/20 p-4 sm:p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 min-h-[160px] sm:min-h-[200px]">
           {/* Left: Jewelry Accent */}
           <div className="hidden md:block w-36 h-36 relative overflow-hidden rounded-full border border-white/40 shadow-inner flex-shrink-0 bg-white/20">
             <img
@@ -560,7 +491,7 @@ export const Home: React.FC = () => {
 
           {/* Center: Curated Copy */}
           <div className="text-center md:text-left flex-1 space-y-2">
-            <h2 className="font-serif text-3xl md:text-4xl italic text-isya-green tracking-wide font-semibold">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl italic text-isya-green tracking-wide font-semibold">
               Everyone's Favourites
             </h2>
             <p className="text-sm tracking-wider text-isya-gold font-bold uppercase">
@@ -569,7 +500,7 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Right: Brand Ambassador Overlay */}
-          <div className="w-44 h-44 md:w-48 md:h-48 relative overflow-hidden rounded-full border border-white/50 shadow flex-shrink-0 bg-white/30">
+          <div className="w-28 h-28 sm:w-44 sm:h-44 md:w-48 md:h-48 relative overflow-hidden rounded-full border border-white/50 shadow flex-shrink-0 bg-white/30">
             <img
               src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=300"
               alt="Kriti Sanon Brand Ambassador"
@@ -580,13 +511,13 @@ export const Home: React.FC = () => {
 
         {/* Curated Product Grid */}
         {productsLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="aspect-[4/5] bg-white rounded-lg border border-gray-100 animate-pulse" />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
             {products?.slice(0, 4).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -595,12 +526,12 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 2.8. GIVA "Latest Collections" Overlapping Product Panels */}
-      <section className="w-full px-4 sm:px-8 lg:px-12 space-y-8">
+      <section className="w-full px-3 sm:px-8 lg:px-12 space-y-6 sm:space-y-8">
         <div className="text-center">
-          <h2 className="font-serif text-3xl sm:text-4xl tracking-widest text-[#0b3c2a] font-semibold">
-            Latest Collections
-          </h2>
-          <div className="w-16 h-[2px] bg-[#b39359] mx-auto mt-3" />
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl tracking-widest text-[#0b3c2a] font-semibold">
+              Latest Collections
+            </h2>
+            <div className="w-12 sm:w-16 h-[2px] bg-[#b39359] mx-auto mt-3" />
         </div>
 
         <Swiper
@@ -672,7 +603,7 @@ export const Home: React.FC = () => {
               <motion.div
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className={`relative overflow-hidden group rounded-[28px] border border-[#e6c89c]/15 shadow-sm h-[420px] flex flex-col justify-between p-6 ${col.bgColor}`}
+                className={`relative overflow-hidden group rounded-[20px] sm:rounded-[28px] border border-[#e6c89c]/15 shadow-sm h-[340px] sm:h-[420px] flex flex-col justify-between p-4 sm:p-6 ${col.bgColor}`}
               >
                 {/* Background image overlay */}
                 <div
@@ -725,12 +656,12 @@ export const Home: React.FC = () => {
       {/* 3. New Arrivals (Swiper Carousel) */}
       <section className="bg-[#faf9f6]/50 py-16 border-y border-[#e6c89c]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-end mb-10">
+          <div className="flex justify-between items-end mb-6 sm:mb-10">
             <div>
               <span className="text-[10px] tracking-[0.35em] text-[#a88a5e] uppercase block font-semibold mb-1">
                 New Additions
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl tracking-wider text-[#0b3c2a]">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl tracking-wider text-[#0b3c2a]">
                 The New Arrivals
               </h2>
             </div>
@@ -743,7 +674,7 @@ export const Home: React.FC = () => {
           </div>
 
           {productsLoading ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="aspect-[4/5] bg-white rounded-lg border border-gray-100 animate-pulse" />
               ))}
@@ -774,7 +705,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 4. Craftsmanship / Storytelling section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -35 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -800,7 +731,7 @@ export const Home: React.FC = () => {
           <span className="text-[10px] tracking-[0.35em] text-[#a88a5e] uppercase block font-semibold">
             Honest Craftsmanship
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl tracking-wide text-[#0b3c2a] leading-tight">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl tracking-wide text-[#0b3c2a] leading-tight">
             Designed to Last <br />A Lifetime
           </h2>
           <p className="text-sm tracking-wider text-gray-600 leading-relaxed font-light">
@@ -827,11 +758,11 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 5. Gifting Store Banner */}
-      <section className="bg-[#0b3c2a] text-[#faf9f6] py-20 relative overflow-hidden">
+      <section className="bg-[#0b3c2a] text-[#faf9f6] py-12 sm:py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1920')] bg-cover bg-center mix-blend-overlay opacity-15" />
         <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 space-y-6">
           <Sparkles className="h-8 w-8 text-[#e6c89c] mx-auto animate-pulse" />
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl tracking-wider text-[#e6c89c]">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl tracking-wider text-[#e6c89c]">
             The Isya Gift Experience
           </h2>
           <p className="text-xs sm:text-sm tracking-widest text-gray-300 max-w-lg mx-auto font-light leading-relaxed">
@@ -860,7 +791,7 @@ export const Home: React.FC = () => {
           <div className="w-16 h-[2px] bg-[#b39359] mx-auto mt-3" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
           {[
             {
               quote: "The diamond ring is absolutely breathtaking! The sparkle is unmatched and the custom velvet packaging made me feel so special.",
@@ -880,7 +811,7 @@ export const Home: React.FC = () => {
           ].map((t, idx) => (
             <div
               key={idx}
-              className="bg-white border border-[#e6c89c]/20 p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 space-y-4 flex flex-col justify-between"
+              className="bg-white border border-[#e6c89c]/20 p-5 sm:p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 space-y-3 sm:space-y-4 flex flex-col justify-between"
             >
               <div className="flex gap-1 text-[#b39359]">
                 {[...Array(5)].map((_, i) => (
@@ -901,7 +832,7 @@ export const Home: React.FC = () => {
 
       {/* 7. Newsletter Section */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-        <h2 className="font-serif text-3xl sm:text-4xl tracking-widest text-[#0b3c2a]">
+        <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl tracking-widest text-[#0b3c2a]">
           Join The Isya Club
         </h2>
         <p className="text-xs tracking-wider text-gray-500 max-w-md mx-auto font-light">

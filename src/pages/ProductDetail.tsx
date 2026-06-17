@@ -100,7 +100,7 @@ export const ProductDetail: React.FC = () => {
   const relatedProducts = allProducts?.filter((p) => p.handle !== product.handle) || [];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-10 sm:space-y-16">
       {/* Breadcrumbs */}
       <nav className="text-[10px] tracking-[0.25em] text-gray-500 uppercase flex gap-2">
         <Link to="/" className="hover:text-[#b39359] transition-colors">Home</Link>
@@ -154,7 +154,7 @@ export const ProductDetail: React.FC = () => {
             <span className="text-xs tracking-[0.3em] text-[#a88a5e] uppercase font-semibold">
               {product.productType || 'Fine Jewellery'}
             </span>
-            <h1 className="font-serif text-3xl md:text-4xl text-[#0b3c2a] tracking-wide font-semibold leading-tight">
+            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#0b3c2a] tracking-wide font-semibold leading-tight">
               {product.title}
             </h1>
           </div>
@@ -231,18 +231,18 @@ export const ProductDetail: React.FC = () => {
           </div>
 
           {/* Trust points */}
-          <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#e6c89c]/20 text-center">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 border-t border-[#e6c89c]/20 text-center">
             <div className="flex flex-col items-center space-y-1.5">
               <Truck className="h-5 w-5 text-[#b39359]" />
-              <span className="text-[10px] tracking-wider text-gray-600 font-medium">Free Shipping</span>
+              <span className="text-[9px] sm:text-[10px] tracking-wide text-gray-600 font-medium">Free Shipping</span>
             </div>
             <div className="flex flex-col items-center space-y-1.5">
               <RotateCcw className="h-5 w-5 text-[#b39359]" />
-              <span className="text-[10px] tracking-wider text-gray-600 font-medium">30-Day Returns</span>
+              <span className="text-[9px] sm:text-[10px] tracking-wide text-gray-600 font-medium">30-Day Returns</span>
             </div>
             <div className="flex flex-col items-center space-y-1.5">
               <Shield className="h-5 w-5 text-[#b39359]" />
-              <span className="text-[10px] tracking-wider text-gray-600 font-medium">Lifetime Warranty</span>
+              <span className="text-[9px] sm:text-[10px] tracking-wide text-gray-600 font-medium">Lifetime Warranty</span>
             </div>
           </div>
 
@@ -306,13 +306,14 @@ export const ProductDetail: React.FC = () => {
 
           <Swiper
             modules={[Navigation, Pagination]}
-            spaceBetween={24}
-            slidesPerView={1}
+            spaceBetween={16}
+            slidesPerView={1.2}
             navigation
             pagination={{ clickable: true }}
             breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 4 },
+              480: { slidesPerView: 2.2, spaceBetween: 16 },
+              768: { slidesPerView: 3, spaceBetween: 20 },
+              1024: { slidesPerView: 4, spaceBetween: 24 },
             }}
             className="pb-12"
           >

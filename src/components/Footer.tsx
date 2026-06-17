@@ -4,11 +4,11 @@ import { Mail, Phone, MapPin, Compass } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#0b3c2a] text-[#faf9f6] pt-16 pb-8 border-t border-[#e6c89c]/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+    <footer className="bg-[#0b3c2a] text-[#faf9f6] pt-10 sm:pt-16 pb-8 border-t border-[#e6c89c]/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
         
         {/* Branding Column */}
-        <div className="space-y-4">
+        <div className="space-y-4 col-span-2 lg:col-span-1">
           <h2 className="font-serif text-3xl tracking-wide font-bold text-[#e6c89c] lowercase flex items-center">
             isya<span className="text-[10px] text-[#e6c89c] ml-0.5 select-none relative -top-1.5">•</span>
           </h2>
@@ -35,7 +35,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Collections Column */}
-        <div>
+        <div className="col-span-1">
           <h3 className="font-serif text-sm tracking-widest text-[#e6c89c] uppercase mb-5 font-semibold">
             Shop Collections
           </h3>
@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Customer Care Column */}
-        <div>
+        <div className="col-span-1">
           <h3 className="font-serif text-sm tracking-widest text-[#e6c89c] uppercase mb-5 font-semibold">
             Customer Services
           </h3>
@@ -88,7 +88,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Contact Column */}
-        <div className="space-y-4">
+        <div className="space-y-4 col-span-2 lg:col-span-1">
           <h3 className="font-serif text-sm tracking-widest text-[#e6c89c] uppercase mb-5 font-semibold">
             Get in Touch
           </h3>

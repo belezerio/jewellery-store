@@ -9,6 +9,8 @@ interface StoreState {
   cart: ShopifyCart | null;
   isCartOpen: boolean;
   isSearchOpen: boolean;
+  isInitialLoading: boolean;
+  startAnimate: boolean;
   
   // Actions
   addToWishlist: (product: Product) => void;
@@ -18,6 +20,8 @@ interface StoreState {
   setCart: (cart: ShopifyCart | null) => void;
   setCartOpen: (open: boolean) => void;
   setSearchOpen: (open: boolean) => void;
+  setInitialLoading: (loading: boolean) => void;
+  setStartAnimate: (start: boolean) => void;
 }
 
 export const useStore = create<StoreState>()(
@@ -28,6 +32,8 @@ export const useStore = create<StoreState>()(
       cart: null,
       isCartOpen: false,
       isSearchOpen: false,
+      isInitialLoading: true,
+      startAnimate: false,
 
       addToWishlist: (product) => {
         const current = get().wishlist;
@@ -48,6 +54,8 @@ export const useStore = create<StoreState>()(
       setCart: (cart) => set({ cart }),
       setCartOpen: (open) => set({ isCartOpen: open }),
       setSearchOpen: (open) => set({ isSearchOpen: open }),
+      setInitialLoading: (loading) => set({ isInitialLoading: loading }),
+      setStartAnimate: (start) => set({ startAnimate: start }),
     }),
     {
       name: 'jewellery-store-storage',

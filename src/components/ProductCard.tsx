@@ -18,6 +18,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const hoverImage = product.images?.edges?.[1]?.node?.url || mainImage;
   const price = product.priceRange?.minVariantPrice;
   const compareAtPrice = product.variants?.edges?.[0]?.node?.compareAtPrice;
+  const firstVariantId = product.variants?.edges?.[0]?.node?.id;
 
   // Generate consistent mock rating and reviews based on name length for visual realism
   const rating = (4.5 + (product.handle.length % 5) * 0.1).toFixed(1);
@@ -86,29 +87,30 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         <button
           onClick={handleWishlistClick}
-          className="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 border border-[#e6c89c]/30 backdrop-blur-sm shadow-sm transition-all duration-300 hover:bg-white hover:scale-110 text-gray-500 hover:text-red-500"
+          className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-white/80 border border-[#e6c89c]/30 backdrop-blur-sm shadow-sm transition-all duration-300 hover:bg-white hover:scale-110 text-gray-500 hover:text-red-500"
           aria-label="Add to wishlist"
         >
-          <Heart className={`h-5 w-5 transition-colors duration-300 ${wishlisted ? 'fill-red-500 text-red-500' : ''}`} />
+          <Heart className={`h-4 w-4 sm:h-5 sm:w-5 transition-colors duration-300 ${wishlisted ? 'fill-red-500 text-red-500' : ''}`} />
         </button>
 
-        <div className="absolute inset-x-0 bottom-4 z-10 flex justify-center opacity-0 translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 px-4">
+        {/* Quick add: always visible on mobile (no hover), hover-reveal on desktop */}
+        <div className="absolute inset-x-0 bottom-2 sm:bottom-4 z-10 flex justify-center sm:opacity-0 sm:translate-y-3 transition-all duration-300 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 px-2 sm:px-4">
           <button
             onClick={handleAddToCart}
             disabled={isAdding}
-            className="w-full flex items-center justify-center gap-2 rounded-full bg-[#0b3c2a] px-4 py-2.5 text-xs font-semibold tracking-wider text-[#faf9f6] hover:bg-[#b39359] transition-colors duration-300 shadow-md"
+            className="w-full flex items-center justify-center gap-1.5 sm:gap-2 rounded-full bg-[#0b3c2a]/90 sm:bg-[#0b3c2a] px-3 sm:px-4 py-2 sm:py-2.5 text-[10px] sm:text-xs font-semibold tracking-wider text-[#faf9f6] hover:bg-[#b39359] transition-colors duration-300 shadow-md backdrop-blur-sm sm:backdrop-blur-none"
           >
-            <ShoppingBag className="h-4 w-4" />
+            <ShoppingBag className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             {isAdding ? 'ADDING...' : 'QUICK ADD'}
           </button>
         </div>
       </Link>
 
-      <div className="flex flex-1 flex-col p-4 bg-[#faf9f6]/30">
-        <span className="text-[10px] uppercase tracking-widest text-[#a88a5e] mb-1 font-medium">
+      <div className="flex flex-1 flex-col p-3 sm:p-4 bg-[#faf9f6]/30">
+        <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#a88a5e] mb-0.5 sm:mb-1 font-medium">
           {product.productType || 'Jewellery'}
         </span>
-        <h3 className="text-sm font-semibold text-[#1c1c1c] tracking-wide line-clamp-1 group-hover:text-[#b39359] transition-colors duration-300">
+        <h3 className="text-xs sm:text-sm font-semibold text-[#1c1c1c] tracking-wide line-clamp-1 group-hover:text-[#b39359] transition-colors duration-300">
           <Link to={`/product/${product.handle}`}>{product.title}</Link>
         </h3>
         <div className="mt-2 flex items-baseline gap-2">

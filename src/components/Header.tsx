@@ -3,12 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { Search, Heart, ShoppingBag, Menu, X } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { useCartQuery } from '../hooks/useShopify';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const { setSearchOpen, setCartOpen, wishlist } = useStore();
+  const { setSearchOpen, setCartOpen, wishlist, isInitialLoading } = useStore();
   const { data: cart } = useCartQuery();
   const location = useLocation();
 
@@ -19,13 +20,24 @@ export const Header: React.FC = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add('scroll-locked');
+    } else {
+      document.body.classList.remove('scroll-locked');
+    }
+    return () => document.body.classList.remove('scroll-locked');
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { name: 'HOME', path: '/' },
@@ -36,9 +48,13 @@ export const Header: React.FC = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+        isInitialLoading && location.pathname === '/'
+          ? 'opacity-0 pointer-events-none'
+          : 'opacity-100'
+      } ${
         scrolled
-          ? 'glass-panel py-3 shadow-md'
-          : 'bg-transparent py-5 border-b border-transparent'
+          ? 'glass-panel py-2 sm:py-3 shadow-md'
+          : 'bg-transparent py-3 sm:py-5 border-b border-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,7 +63,7 @@ export const Header: React.FC = () => {
           <div className="flex lg:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-[#1c1c1c] hover:text-[#b39359] transition-colors p-1"
+              className="text-[#1c1c1c] hover:text-[#b39359] transition-colors p-2 -ml-2"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -57,7 +73,7 @@ export const Header: React.FC = () => {
           {/* Left: Brand / Logo */}
           <Link
             to="/"
-            className="font-serif text-3xl tracking-wide text-[#0b3c2a] font-bold hover:text-[#b39359] transition-all duration-300 lowercase relative flex items-center"
+            className="font-serif text-2xl sm:text-3xl tracking-wide text-[#0b3c2a] font-bold hover:text-[#b39359] transition-all duration-300 lowercase relative flex items-center"
           >
             isya
             <span className="text-[10px] text-[#b39359] ml-0.5 select-none relative -top-1.5">•</span>
@@ -82,25 +98,25 @@ export const Header: React.FC = () => {
           </nav>
 
           {/* Right: Actions */}
-          <div className="flex items-center space-x-4 sm:space-x-6">
+          <div className="flex items-center space-x-2 sm:space-x-4">
             {/* Search */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="text-[#1c1c1c] hover:text-[#b39359] transition-all duration-300 p-1 hover:scale-105"
+              className="text-[#1c1c1c] hover:text-[#b39359] transition-all duration-300 p-2 hover:scale-105"
               aria-label="Search Store"
             >
-              <Search className="h-5.5 w-5.5 sm:h-6 sm:w-6" />
+              <Search className="h-5 w-5 sm:h-6 sm:w-6" />
             </button>
 
             {/* Wishlist */}
             <Link
               to="/wishlist"
-              className="text-[#1c1c1c] hover:text-[#b39359] transition-all duration-300 p-1 relative hover:scale-105"
+              className="text-[#1c1c1c] hover:text-[#b39359] transition-all duration-300 p-2 relative hover:scale-105"
               aria-label="View Wishlist"
             >
-              <Heart className="h-5.5 w-5.5 sm:h-6 sm:w-6" />
+              <Heart className="h-5 w-5 sm:h-6 sm:w-6" />
               {wishlistCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#b39359] text-white text-[8px] font-sans font-bold w-4 h-4 rounded-full flex items-center justify-center animate-pulse">
+                <span className="absolute top-0.5 right-0.5 bg-[#b39359] text-white text-[8px] font-sans font-bold w-4 h-4 rounded-full flex items-center justify-center animate-pulse">
                   {wishlistCount}
                 </span>
               )}
@@ -109,12 +125,12 @@ export const Header: React.FC = () => {
             {/* Cart */}
             <button
               onClick={() => setCartOpen(true)}
-              className="text-[#1c1c1c] hover:text-[#b39359] transition-all duration-300 p-1 relative hover:scale-105"
+              className="text-[#1c1c1c] hover:text-[#b39359] transition-all duration-300 p-2 relative hover:scale-105"
               aria-label="Open Cart"
             >
-              <ShoppingBag className="h-5.5 w-5.5 sm:h-6 sm:w-6" />
+              <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#0b3c2a] text-[#faf9f6] text-[8px] font-sans font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="absolute top-0.5 right-0.5 bg-[#0b3c2a] text-[#faf9f6] text-[8px] font-sans font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
@@ -123,20 +139,45 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-[#faf9f6] border-b border-[#e6c89c]/20 shadow-lg py-6 px-4 space-y-4 flex flex-col">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className="text-xs font-semibold tracking-widest text-[#1c1c1c] hover:text-[#b39359] transition-colors py-2 border-b border-gray-50"
+      {/* Mobile Drawer Menu - Animated */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="lg:hidden fixed inset-0 top-0 bg-black/30 z-[-1]"
+            />
+            {/* Menu panel */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="lg:hidden absolute top-full left-0 right-0 bg-[#faf9f6] border-b border-[#e6c89c]/20 shadow-lg py-6 px-6 space-y-1 flex flex-col"
             >
-              {link.name}
-            </Link>
-          ))}
-        </div>
-      )}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-sm font-semibold tracking-widest py-3 border-b border-gray-100 transition-colors ${
+                    location.pathname === link.path
+                      ? 'text-[#b39359]'
+                      : 'text-[#1c1c1c] hover:text-[#b39359]'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

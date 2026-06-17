@@ -12,6 +12,18 @@ export const CartDrawer: React.FC = () => {
   const { mutate: removeMut, isPending: isRemoving } = useRemoveFromCart();
   const { data: products } = useProducts(3); // Fetch 3 products for upsell recommendations
 
+  // Lock body scroll when cart is open
+  React.useEffect(() => {
+    if (isCartOpen) {
+      document.body.classList.add('scroll-locked');
+    } else {
+      document.body.classList.remove('scroll-locked');
+    }
+    return () => {
+      document.body.classList.remove('scroll-locked');
+    };
+  }, [isCartOpen]);
+
   const cart = cartData;
   const lines = cart?.lines?.edges?.map(e => e.node) || [];
   const subtotal = cart?.cost?.subtotalAmount;
@@ -137,23 +149,25 @@ export const CartDrawer: React.FC = () => {
 
                           <div className="flex justify-between items-end mt-2">
                             {/* Quantity Controls */}
-                            <div className="flex items-center border border-gray-200 rounded-full py-1 px-2.5">
+                            <div className="flex items-center border border-gray-200 rounded-full">
                               <button
                                 onClick={() => handleUpdateQty(item.id, item.quantity, -1)}
                                 disabled={isUpdating || isRemoving}
-                                className="text-gray-500 hover:text-[#b39359] transition-colors p-0.5 disabled:opacity-50"
+                                className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-[#b39359] hover:bg-gray-50 rounded-full transition-colors disabled:opacity-50 tap-target-bypass"
+                                aria-label="Decrease quantity"
                               >
-                                <Minus className="h-3.5 w-3.5" />
+                                <Minus className="h-3.5 w-3.5 pointer-events-none" />
                               </button>
-                              <span className="text-xs font-semibold px-3 text-[#1c1c1c] min-w-[16px] text-center">
+                              <span className="text-xs font-semibold px-2 text-[#1c1c1c] min-w-[20px] text-center">
                                 {item.quantity}
                               </span>
                               <button
                                 onClick={() => handleUpdateQty(item.id, item.quantity, 1)}
                                 disabled={isUpdating || isRemoving}
-                                className="text-gray-500 hover:text-[#b39359] transition-colors p-0.5 disabled:opacity-50"
+                                className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-[#b39359] hover:bg-gray-50 rounded-full transition-colors disabled:opacity-50 tap-target-bypass"
+                                aria-label="Increase quantity"
                               >
-                                <Plus className="h-3.5 w-3.5" />
+                                <Plus className="h-3.5 w-3.5 pointer-events-none" />
                               </button>
                             </div>
 

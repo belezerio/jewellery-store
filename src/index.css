@@ -97,6 +97,19 @@ html.lenis, html.lenis body {
   background: var(--color-gold) !important;
 }
 
+/* Hide swiper navigation arrows on mobile - they overlap content and are not touch-friendly */
+@media (max-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
+  }
+
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+  }
+}
+
 /* Glassmorphism Classes */
 .glass-panel {
   background: rgba(250, 249, 246, 0.7);
@@ -139,4 +152,52 @@ html.lenis, html.lenis body {
 
 .image-zoom-container:hover img {
   transform: scale(1.08);
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-none::-webkit-scrollbar {
+  display: none !important;
+}
+.scrollbar-none {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
+
+/* Body scroll lock for modals/drawers */
+body.scroll-locked {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+  touch-action: none;
+}
+
+/* Global mobile touch-friendliness */
+@media (max-width: 768px) {
+  /* Ensure tap targets are at least 44px */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Except inline text links and tiny badge elements */
+  a.inline-link,
+  span.badge,
+  .swiper-pagination-bullet,
+  .tap-target-bypass {
+    min-height: unset !important;
+    min-width: unset !important;
+  }
+
+  /* Prevent any horizontal overflow globally */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+}
+
+/* Disable Lenis smooth scroll on touch devices for native momentum */
+@media (hover: none) and (pointer: coarse) {
+  .lenis.lenis-smooth {
+    scroll-behavior: smooth !important;
+  }
 }

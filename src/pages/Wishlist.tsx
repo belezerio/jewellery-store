@@ -8,7 +8,7 @@ export const Wishlist: React.FC = () => {
   const { wishlist } = useStore();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10 min-h-[60vh]">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12 space-y-6 sm:space-y-10 min-h-[60vh]">
       {/* Header */}
       <div className="text-center space-y-3">
         <Heart className="h-10 w-10 text-[#b39359] mx-auto fill-current" />
@@ -34,7 +34,7 @@ export const Wishlist: React.FC = () => {
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-8">
           {wishlist.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

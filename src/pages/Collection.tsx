@@ -68,7 +68,7 @@ export const Collection: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
       {/* 1. Header Banner */}
-      <div className="relative h-60 md:h-72 rounded-xl overflow-hidden bg-emerald-950 flex items-center justify-center text-center p-6 border border-[#e6c89c]/20">
+      <div className="relative h-48 sm:h-60 md:h-72 rounded-xl overflow-hidden bg-emerald-950 flex items-center justify-center text-center p-4 sm:p-6 border border-[#e6c89c]/20">
         {collection?.image?.url ? (
           <div className="absolute inset-0 bg-cover bg-center opacity-40 scale-105" style={{ backgroundImage: `url(${collection.image.url})` }} />
         ) : (
@@ -79,7 +79,7 @@ export const Collection: React.FC = () => {
           <span className="text-[10px] tracking-[0.35em] text-[#e6c89c] uppercase font-bold block">
             Exclusive Selection
           </span>
-          <h1 className="font-serif text-3xl sm:text-5xl text-[#faf9f6] tracking-wider uppercase font-semibold">
+          <h1 className="font-serif text-2xl sm:text-4xl lg:text-5xl text-[#faf9f6] tracking-wider uppercase font-semibold">
             {searchQuery ? `Search Results` : collection?.title || 'Luxury Collection'}
           </h1>
           <p className="text-xs sm:text-sm text-gray-200 tracking-wider font-light line-clamp-2">
@@ -132,7 +132,7 @@ export const Collection: React.FC = () => {
 
       {/* 3. Product Grid */}
       {isLoading ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-8">
           {[...Array(8)].map((_, i) => (
             <div key={i} className="flex flex-col space-y-4">
               <div className="aspect-[4/5] bg-white border border-gray-100 rounded-lg animate-pulse" />
@@ -149,7 +149,7 @@ export const Collection: React.FC = () => {
         </div>
       ) : (
         <div className="space-y-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-8">
             {displayedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
